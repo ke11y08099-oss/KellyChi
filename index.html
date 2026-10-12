@@ -7,6 +7,9 @@ STEP 1: Add the required HTML5 skeleton
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kelly Chi | 2026 Marketing Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -43,8 +46,33 @@ STEP 1: Add the required HTML5 skeleton
       </div>
     </section>
 
+    <!-- MODA continuously moving photo belt (one-third of the screen) -->
+    <section class="moda-strip" aria-label="MODA Magazine photos">
+      <div class="moda-track">
+
+        <!-- Set 1 -->
+        <figure class="moda-item"><img src="images/MODA1.png" alt="MODA Magazine, Spring Print 2025"><figcaption>Spring Print 2025</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA2.png" alt="MODA Magazine, Spring Print 2026"><figcaption>Spring Print 2026</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA3.png" alt="MODA Magazine, Fall Digital 2025"><figcaption>Fall Digital 2025</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA4.png" alt="MODA Magazine, Fall Digital 2024"><figcaption>Fall Digital 2024</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA5.png" alt="MODA Magazine, Spring Print 2026"><figcaption>Spring Print 2026</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA6.png" alt="MODA Magazine, Fall Print 2024"><figcaption>Fall Print 2024</figcaption></figure>
+        <figure class="moda-item"><img src="images/MODA7.png" alt="MODA Magazine, Fall Print 2025"><figcaption>Fall Print 2025</figcaption></figure>
+
+        <!-- Set 2 (exact duplicate so the loop never has a gap) -->
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA1.png" alt=""><figcaption>Spring Print 2025</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA2.png" alt=""><figcaption>Spring Print 2026</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA3.png" alt=""><figcaption>Fall Digital 2025</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA4.png" alt=""><figcaption>Fall Digital 2024</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA5.png" alt=""><figcaption>Spring Print 2026</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA6.png" alt=""><figcaption>Fall Print 2024</figcaption></figure>
+        <figure class="moda-item" aria-hidden="true"><img src="images/MODA7.png" alt=""><figcaption>Fall Print 2025</figcaption></figure>
+
+      </div>
+    </section>
+
     <!-- =========================================================
-    STEP 4: Features section (3 blocks) + MODA carousel
+    STEP 4: Features section (3 blocks) + featured content
     ========================================================= -->
     <section class="features container" id="work">
       <h2 class="section-title">Past Work</h2>
@@ -65,20 +93,6 @@ STEP 1: Add the required HTML5 skeleton
           <p>The Legacy Project is a 501(c)(3) national nonprofit connecting younger and older adults for multigenerational friendship and storytelling. Position: Director of Public Relations. I started March 2025-Present.</p>
         </div>
       </div>
-
-      <!-- MODA carousel (continuous scroll) -->
-      <div class="carousel" aria-label="MODA Magazine covers">
-        <div class="carousel-track">
-          <!-- Set 1 -->
-          <img src="images/MODA1.png" alt="MODA Magazine Spring Print 2025 cover">
-          <img src="images/MODA2.png" alt="MODA Magazine Spring Print 2026 cover">
-          <img src="images/MODA3.png" alt="MODA Magazine Fall Digital 2025 cover">
-          <!-- Set 2 (duplicate so the loop has no gap) -->
-          <img src="images/MODA1.png" alt="" aria-hidden="true">
-          <img src="images/MODA2.png" alt="" aria-hidden="true">
-          <img src="images/MODA3.png" alt="" aria-hidden="true">
-        </div>
-      </div>
     </section>
 
     <!-- Featured content -->
@@ -95,21 +109,21 @@ STEP 1: Add the required HTML5 skeleton
     ========================================================= -->
     <section class="secondary container" id="articles">
       <div class="secondary-grid">
-        <div class="card">
+        <a class="card" href="https://www.spelman.edu/news/2026/07/60-years-apart-connected-by-spelman-a-sisterhood-that-bridges-generations.html?feature" target="_blank" rel="noopener">
           <div class="card-text">
             <h3>Article #1</h3>
             <p>Dr. Thomas &amp; Lauren</p>
           </div>
           <div class="card-image img-a"></div>
-        </div>
+        </a>
 
-        <div class="card">
+        <a class="card" href="https://thefulcrum.us/bridging-common-ground/connecting-elderly-and-youth" target="_blank" rel="noopener">
           <div class="card-text">
             <h3>Article #2</h3>
             <p>Bella &amp; Jean</p>
           </div>
           <div class="card-image img-b"></div>
-        </div>
+        </a>
       </div>
     </section>
 

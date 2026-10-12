@@ -7,10 +7,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
   color: #222;
   background-color: rgb(250, 246, 242);
+}
+
+h1, h2, h3, .brand {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -23,7 +27,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   margin: 0 auto;
 }
 
-/* ===== Full-screen sections (hero is half a screen, set below) ===== */
+/* ===== Full-screen sections ===== */
 .features,
 .featured,
 .secondary,
@@ -76,7 +80,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   color: #3f1124;
 }
 
-/* ===== Hero (half the screen) ===== */
+/* ===== Hero (top two-thirds of the first screen) ===== */
 .hero {
   /* TODO C */
   background-image:
@@ -84,7 +88,7 @@ img, video { max-width: 100%; height: auto; display: block; }
     url("images/hero.png");
   background-size: cover;
   background-position: center;
-  min-height: 50vh;
+  min-height: 67vh;
   padding-top: 70px;          /* room for the fixed header */
   display: flex;
   align-items: center;
@@ -112,6 +116,58 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-size: 22px;
   font-weight: 700;
   color: #561313;
+}
+
+/* ===== MODA moving photo belt (bottom third of the first screen) =====
+   --h is the strip height. Every photo is the same size, worked out from it. */
+.moda-strip {
+  --h: 33vh;
+  height: var(--h);
+  padding: 10px 0;
+  overflow: hidden;
+  background: #3f1124;
+}
+
+.moda-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  /* moves left to right, constantly. 29s = one full set of 7 photos. */
+  animation: moda-scroll 29s linear infinite;
+}
+
+.moda-item {
+  flex: none;
+  margin: 0 20px 0 0;   /* even spacing between every photo */
+  /* photo is 4:5 (portrait); height = strip minus padding and caption room */
+  width: calc((var(--h) - 20px - 56px) * 0.8);
+}
+
+.moda-item img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;     /* all photos end up exactly the same size */
+  max-width: none;
+}
+
+.moda-item figcaption {
+  padding-top: 6px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+/* the track holds two identical sets; sliding it by half and looping is seamless */
+@keyframes moda-scroll {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moda-strip { overflow-x: auto; }
+  .moda-track { animation: none; }
 }
 
 /* ===== Buttons ===== */
@@ -158,7 +214,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   text-align: center;
 }
 .feature h3 { margin: 0 0 8px; color: #3f1124; }
-.feature p { margin: 0; color: #555; font-size: 14px; }
+.feature p { margin: 0; color: #555; font-size: 15px; }
 
 .feature img {
   margin: 10px auto 0;
@@ -174,40 +230,6 @@ img, video { max-width: 100%; height: auto; display: block; }
   margin: 0 auto 12px;
   color: #666;
   font-size: 22px;
-}
-
-/* ===== MODA carousel (continuous scroll) ===== */
-.carousel {
-  overflow: hidden;
-  margin-top: 30px;
-}
-
-.carousel-track {
-  display: flex;
-  width: max-content;
-  animation: carousel-scroll 25s linear infinite;
-}
-
-.carousel:hover .carousel-track {
-  animation-play-state: paused;
-}
-
-.carousel img {
-  height: 45vh;
-  width: auto;
-  max-width: none;
-  flex: none;
-  margin-right: 20px;
-}
-
-@keyframes carousel-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .carousel { overflow-x: auto; }
-  .carousel-track { animation: none; }
 }
 
 /* ===== Featured content ===== */
@@ -231,7 +253,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   max-width: 680px;
   margin: 10px auto 22px;
   color: #666;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .media {
@@ -260,6 +282,15 @@ img, video { max-width: 100%; height: auto; display: block; }
   background: #fff;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  color: inherit;
+}
+
+/* cards are links now: lift slightly on hover instead of underlining */
+.card:hover {
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(63, 17, 36, 0.18);
+  transform: translateY(-2px);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .card-text {
@@ -276,7 +307,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .card-text p {
   margin: 0 0 14px;
   color: #666;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .card-image {
@@ -365,11 +396,11 @@ img, video { max-width: 100%; height: auto; display: block; }
   html { scroll-padding-top: 0; }
   .features, .featured, .secondary, .cta { min-height: auto; }
   .hero { min-height: 50vh; padding-top: 0; }
+  .moda-strip { --h: 40vh; }
   .header-inner, .features-grid, .secondary-grid, .footer-inner {
     flex-direction: column;
   }
   .site-nav a { margin: 0 12px 0 0; display: inline-block; }
   .hero h1 { font-size: 32px; }
-  .carousel img { height: 40vh; }
   .card { grid-template-columns: 1fr; }
 }
