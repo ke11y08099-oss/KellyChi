@@ -1,0 +1,855 @@
+/* styles.css */
+
+/* Fonts (Bebas Neue, Noto Serif Display, Montserrat) are loaded by the <link> in each HTML file */
+
+/* ===== Base styles ===== */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #222;
+  background-color: #ffffff;
+  overflow-x: hidden;           /* needed for the full-width MODA photos */
+}
+
+/* Headings: Bebas Neue */
+h1, h2, .brand {
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-weight: 400;
+}
+
+/* Subheadings: Noto Serif Display */
+h3, h4, .section-title {
+  font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+.container {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+}
+
+/* Large Bebas Neue section headings ("Past Work") */
+h2.big-title {
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(56px, 8vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ===== Full-screen sections ===== */
+.features,
+.featured {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ===== Header (stays at the top, floats over the hero) ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+  background: #ffffff;
+}
+
+.site-header .container {
+  width: 100%;
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.brand {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #000000;
+}
+.brand a { color: inherit; }
+.brand a:hover { text-decoration: none; }
+
+/* "Contact me" (left of the menu button) + menu button */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.header-contact {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+}
+.header-contact:hover { text-decoration: none; }
+
+/* ===== Menu (top right) ===== */
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 8px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu-btn span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #000;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* turns into an X when open */
+.menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 280px;
+  display: none;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #eee;
+  box-shadow: 0 8px 24px rgba(63, 17, 36, 0.15);
+}
+
+.menu.is-open { display: flex; }
+
+.menu a {
+  padding: 16px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3f1124;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.menu a:last-child { border-bottom: 0; }
+.menu a:hover { background: #f3e3e3; text-decoration: none; }
+
+/* ===== Hero (image background) =====
+   Hero 60vh + black photo strip 40vh = exactly one screen on load. */
+.hero {
+  background-image:
+    linear-gradient(rgba(249, 237, 237, 0.65), rgba(255, 255, 255, 0.65)),
+    url("images/hero.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 60vh;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.hero .container {
+  width: 96%;
+  max-width: none;
+}
+
+.hero-content {
+  text-align: center;
+  padding: 20px 0;
+  color: #000000;
+}
+
+.hero h1 {
+  font-size: min(20vw, 40vh);   /* the vh limit keeps it from pushing the hero taller */
+  font-weight: 400;
+  line-height: 0.9;
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  padding-left: 0.06em;         /* keeps the name centered */
+}
+
+/* Subheading under the name: Montserrat */
+.hero-subhead {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  margin: 10px 0 0;
+  font-size: clamp(12px, 1.3vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+/* ===== MODA moving photo belt =====
+   --h is the strip height. Every photo is the same size, worked out from it. */
+.moda-strip {
+  --h: 40vh;
+  height: var(--h);
+  padding: 10px 0;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+  isolation: isolate;
+}
+
+.moda-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: moda-scroll 20s linear infinite;  /* lower = faster, higher = slower */
+  will-change: transform;
+}
+
+.moda-item {
+  flex: none;
+  margin: 0 20px 0 0;   /* margin on EVERY item keeps the loop math exact */
+  width: calc((var(--h) - 20px - 56px) * 0.8);
+}
+
+.moda-item img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  max-width: none;
+}
+
+.moda-item figcaption {
+  padding-top: 6px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+/* The track holds two identical sets; sliding it by half and looping is seamless. */
+@keyframes moda-scroll {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moda-strip { overflow-x: auto; }
+  .moda-track { animation: none; }
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.btn-dark {
+  background: #000000;
+  color: #fff;
+}
+.btn-dark:hover { background: #000000; text-decoration: none; }
+
+.btn-outline {
+  border: 2px solid #000000;
+  color: #000000;
+  background: transparent;
+}
+.btn-outline:hover { background: #f3e3e3; text-decoration: none; }
+
+/* ===== Past Work section (home page) ===== */
+.features {
+  width: 100%;
+  padding: 80px 20px 42px;   /* 20px on the left and right */
+}
+
+.section-title {
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ===== Past Work: 2x2 image tiles =====
+   gap = space between squares; width = size of the whole grid. */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;                    /* space between squares */
+  width: 100%;                  /* the section above adds 20px on each side */
+  margin: 40px 0 0;
+}
+
+.work-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;          /* keeps every tile square */
+  overflow: hidden;             /* stops the blurred edges from spilling out */
+  background: #eaeaea;
+  border: 1px solid #ddd;
+}
+
+.work-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(6px);
+  transform: scale(1.08);       /* hides the soft edges the blur creates */
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+/* clear image on hover or keyboard focus */
+.work-tile:hover img,
+.work-tile:focus-visible img {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* label sits on top, fades out when the image clears */
+.work-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 12px;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(44px, 5.5vw, 88px);   /* text inside the 4 squares */
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease;
+}
+
+.work-tile:hover .work-label,
+.work-tile:focus-visible .work-label {
+  opacity: 0;
+}
+
+/* phones and tablets have no hover, so show the image clearly */
+@media (hover: none) {
+  .work-tile img { filter: none; transform: none; }
+  .work-label { opacity: 1; }
+}
+
+/* Past Work squares repeated at the bottom of every project page */
+.more-work {
+  padding: 90px 20px 100px;
+  border-top: 1px solid #e5ddd5;
+  background: #ffffff;
+}
+
+/* ===== Featured content ===== */
+.featured {
+  padding: 80px 0 36px;
+  background: #ffffff;
+}
+
+.featured .container {
+  width: 100%;
+  max-width: none;
+  padding: 0 20px;
+}
+
+.featured video {
+  width: 100%;
+  margin: 0;
+}
+
+.section-lede {
+  text-align: left;
+  max-width: 680px;
+  margin: 10px 0 22px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* ===== Cards (used on the PR page) ===== */
+.secondary-grid {
+  display: flex;
+  gap: 26px;
+  max-width: 1000px;
+}
+
+.card {
+  flex: 1;
+  border: 1px solid #eee;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: inherit;
+}
+
+/* cards are links: lift slightly on hover instead of underlining */
+.card:hover {
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(63, 17, 36, 0.18);
+  transform: translateY(-2px);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card-text {
+  padding: 18px;
+}
+
+.card-text h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.card-text p {
+  margin: 0 0 14px;
+  color: #666;
+  font-size: 14px;
+}
+
+.card-image {
+  min-height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+
+.img-a {
+  background-image: url("images/TL.png");    /* Dr. Thomas & Lauren */
+}
+.img-b {
+  background-image: url("images/BJ.png");    /* Bella & Jean */
+}
+
+/* ===== Intro (headshot left, text right; sits right after the MODA belt) ===== */
+.intro {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 90px 0;
+  display: grid;
+  grid-template-columns: minmax(240px, 380px) 1fr;
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+
+.headshot {
+  width: 100%;
+  aspect-ratio: 4 / 5;          /* portrait */
+  object-fit: cover;
+  border-radius: 0;             /* square corners */
+  background: #eaeaea;
+}
+
+/* description uses your heading font (Bebas Neue) */
+.about-text {
+  font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(30px, 4.2vw, 60px);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  margin: 0;
+  color: #000;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+}
+
+.intro-hi {
+  font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(18px, 2vw, 28px);
+  letter-spacing: 0.04em;
+  margin: 0;
+  color: #000;
+}
+
+/* "Let's connect": no button outline, just a line as wide as the text above it */
+.connect-link {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid #000;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #000;
+}
+.connect-link:hover { text-decoration: none; }
+
+/* ===== CTA (Let's Chat): fills the screen ===== */
+.cta {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  padding: 60px 0;
+}
+
+.cta-inner.container {
+  width: 96%;
+  max-width: none;
+  text-align: center;
+}
+
+/* Big "Let's Chat!" heading */
+.cta-inner h2 {
+  margin: 0 0 34px;
+  font-size: min(18vw, 42vh);   /* raise the numbers for even bigger text */
+  line-height: 0.95;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* "Back to Home" button under the Past Work squares */
+.home-btn-wrap {
+  text-align: center;
+  margin-top: 56px;
+}
+
+/* ===== Footer (same image background as the hero) ===== */
+.site-footer {
+  background-image:
+    linear-gradient(rgba(249, 237, 237, 0.65), rgba(255, 255, 255, 0.65)),
+    url("images/hero.png");
+  background-size: cover;
+  background-position: center;
+  border-top: 1px solid #eee;
+  padding: 60px 0;
+  color: #000000;
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  color: #000000;
+  text-align: right;
+}
+.site-footer li { margin: 4px 0; }
+
+.footer-inner {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;   /* contact list sits in the bottom right */
+}
+
+/* ===== Project pages ===== */
+.page-content {
+  width: 100%;
+  max-width: none;
+  padding: 120px 20px 60px;   /* 20px left and right, same as the grid */
+}
+
+.page-content h1 {
+  font-size: clamp(44px, 7vw, 90px);
+  line-height: 1;
+  margin: 0 0 30px;
+}
+
+.project {
+  padding: 50px 0;
+  border-top: 1px solid #e5ddd5;
+}
+
+.project h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.05;
+  margin: 0 0 6px;
+}
+
+/* bigger titles on project pages (e.g. "Mock & Co.") */
+.project h2.big-title {
+  font-size: clamp(56px, 8vw, 120px);
+  text-align: left;
+  margin: 0 0 8px;
+}
+
+.project-role {
+  font-family: 'Noto Serif Display', Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: #666;
+  margin: 0 0 18px;
+}
+
+.project p { max-width: 760px; }
+
+.sub {
+  margin: 34px 0 14px;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* campaign impact numbers */
+.stats { list-style: none; margin: 0 0 30px; padding: 0; }
+.stats li { padding: 8px 0; border-bottom: 1px solid #e5ddd5; max-width: 760px; }
+.stats strong {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-right: 8px;
+}
+
+/* image slots: gray box until you add the photo */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #eaeaea;
+  border: 1px solid #ddd;
+}
+.gallery-2 { grid-template-columns: repeat(2, 1fr); }
+.gallery-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* full-screen-width rectangular photos (MODA shoots on Creative Direction) */
+.gallery-full {
+  display: grid;
+  gap: 12px;
+  width: calc(100% + 40px);
+  margin: 20px 0 0 -20px;      /* edge to edge */
+}
+.gallery-full img {
+  width: 100%;
+  aspect-ratio: 16 / 9;                /* rectangular; use object-fit: contain to show whole photos */
+  object-fit: cover;
+  background: #eaeaea;
+}
+
+/* full-screen-width graphics, two per row (MODA graphics) */
+.gallery-full-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+  width: calc(100% + 40px);
+  margin: 20px 0 0 -20px;      /* edge to edge */
+}
+.gallery-full-2 img {
+  width: 100%;
+  height: auto;                        /* keeps each graphic's own shape, no cropping */
+  background: #eaeaea;
+}
+
+/* Curation: 3 large portrait photos in a row, then landscape photos stacked */
+.curation-portrait {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+.curation-portrait img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #eaeaea;
+}
+
+.curation-landscape {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+.curation-landscape img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100dvh - 100px);   /* never taller than the screen */
+  object-fit: cover;
+  background: #eaeaea;
+}
+
+/* vertical (TikTok-style) video next to photos */
+.media-row {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  margin-top: 20px;
+}
+.video-vertical {
+  height: calc(100dvh - 120px);      /* fits the screen height */
+  width: auto;
+  aspect-ratio: 9 / 16;
+  flex: none;
+  max-width: 50%;
+  background: #000;
+  object-fit: cover;
+}
+.media-row .gallery {
+  flex: 1;
+  margin-top: 0;
+  height: calc(100dvh - 120px);      /* same height as the video */
+  grid-template-rows: 100%;
+}
+.media-row .gallery img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+/* two videos side by side (UGC) */
+.video-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+.video-row video {
+  height: 500px;          /* width adjusts to each video's shape */
+  width: auto;
+  max-width: 100%;
+  background: #000;
+}
+
+/* full-width campaign videos */
+.feature-video {
+  display: block;
+  width: 100%;
+  max-height: calc(100dvh - 100px);   /* whole video fits on screen */
+  object-fit: contain;
+  background: #000;
+  margin: 20px 0;
+}
+
+/* press release slots */
+.press-grid { display: grid; gap: 10px; max-width: 760px; }
+.press-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.press-item:hover { box-shadow: 0 6px 18px rgba(63, 17, 36, 0.18); text-decoration: none; }
+.press-num { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 28px; color: #999; }
+
+/* ===== Button text scroll effect =====
+   Text is wrapped as <span class="roll"><span data-text="Same text">Same text</span></span>.
+   On hover the text slides up and a copy slides in from below, so it looks like it scrolls in place. */
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.5;
+}
+.roll > span {
+  display: block;
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.roll > span::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  white-space: nowrap;
+}
+a:hover .roll > span,
+a:focus-visible .roll > span {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll > span { transition: none; }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 700px) {
+  .site-header { position: static; }
+  html { scroll-padding-top: 0; }
+  .features, .featured, .cta { min-height: auto; }
+  .hero { min-height: 60vh; padding-top: 0; }
+  .hero h1 { font-size: 20vw; }
+  .moda-strip { --h: 40vh; }
+  .secondary-grid { flex-direction: column; }
+  .card { grid-template-columns: 1fr; }
+  .menu { min-width: 240px; }
+  .media-row { flex-direction: column; }
+  .video-row video { height: auto; width: 100%; }
+  .gallery-3 { grid-template-columns: repeat(2, 1fr); }
+  .curation-portrait { grid-template-columns: 1fr; }
+  .video-vertical { height: auto; width: 100%; max-width: none; }
+  .media-row .gallery { height: auto; grid-template-rows: auto; }
+  .media-row .gallery img { height: auto; aspect-ratio: 4 / 5; }
+  .intro { grid-template-columns: 1fr; }
+  .header-right { gap: 12px; }
+}
+
+/* ===== Custom cursor (a circle under the normal arrow, created by cursor.js) ===== */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;        /* always half the size, so the dot stays centered */
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  mix-blend-mode: difference;   /* inverts on normal sections */
+  transition: opacity 0.25s, width 0.2s, height 0.2s, margin 0.2s;
+}
+
+.cursor-dot.is-visible { opacity: 1; }
+
+/* bigger over links, buttons and cards */
+.cursor-dot.is-hover {
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+}
+
+/* over photos and video: small, soft, no inversion.
+   Keep this LAST so it wins over .is-visible and .is-hover. */
+.cursor-dot.is-image {
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  mix-blend-mode: normal;
+  background: #fff;             /* change to #000 for black */
+  opacity: 0.55;                /* lower = fainter */
+}
