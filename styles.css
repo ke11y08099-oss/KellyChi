@@ -853,3 +853,13 @@ a:focus-visible .roll > span {
   background: #fff;             /* change to #000 for black */
   opacity: 0.55;                /* lower = fainter */
 }
+
+/* MW photos on the Campaigns page: same full-width format as the videos */
+.feature-image {
+  display: block;
+  width: 100%;
+  max-height: calc(100dvh - 100px);   /* whole photo fits on screen */
+  object-fit: contain;
+  background: #000;
+  margin: 20px 0;
+}
